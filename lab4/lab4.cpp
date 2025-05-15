@@ -4,6 +4,8 @@
 #include <queue>
 using namespace std;
 
+//https://www.youtube.com/watch?v=AflQ-zFa2qM
+
 // Функция BFS для поиска одной компоненты связности
 void bfs(int start, vector<vector<int>>& graph, vector<bool>& visited) {
     queue<int> q;
