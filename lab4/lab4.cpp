@@ -5,8 +5,8 @@
 using namespace std;
 
 //https://www.youtube.com/watch?v=AflQ-zFa2qM
+//https://proglib.io/p/10-algoritmov-dlya-raboty-s-grafami-kotorye-dolzhen-znat-kazhdyy-koder-2022-06-17
 
-// Функция BFS для поиска одной компоненты связности
 void bfs(int start, vector<vector<int>>& graph, vector<bool>& visited) {
     queue<int> q;
     q.push(start);
@@ -16,7 +16,6 @@ void bfs(int start, vector<vector<int>>& graph, vector<bool>& visited) {
         int v = q.front();
         q.pop();
 
-        // Обходим всех соседей текущей вершины
         for (int u : graph[v]) {
             if (!visited[u]) {
                 visited[u] = true;
@@ -27,32 +26,27 @@ void bfs(int start, vector<vector<int>>& graph, vector<bool>& visited) {
 }
 
 int main() {
-    int n, m; // Количество городов и дорог
+    int n, m;
     cin >> n >> m;
 
-    // Создаём граф
     vector<vector<int>> graph(n);
     for (int i = 0; i < m; i++) {
         int a, b;
         cin >> a >> b;
-        a--; b--; // Приводим к индексам от 0
+        a--; b--;
         graph[a].push_back(b);
-        graph[b].push_back(a); // Дороги двусторонние
+        graph[b].push_back(a);
     }
 
-    vector<bool> visited(n, false); // Массив посещённых вершин
-    int components = 0; // Количество компонент связности
+    vector<bool> visited(n, false); 
+    int components = 0;
 
-    // Находим все компоненты связности
     for (int i = 0; i < n; i++) {
         if (!visited[i]) {
             components++;
             bfs(i, graph, visited);
         }
     }
-
-    // Для соединения всех компонент нужно построить components - 1 дорог
     cout << components - 1 << endl;
-
     return 0;
 }
